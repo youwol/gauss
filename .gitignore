@@ -11,3 +11,8 @@ dist/examples
 dist/tests
 
 sources/
+
+cdn.zip
+**/.DS_Store
+
+.yw_pipeline/__pycache__/
