@@ -1,9 +1,9 @@
-import { norm2 } from "./math"
-import { Displ, Point, Force } from "./types"
+import { norm2 } from './math'
+import { Displ, Point, Force } from './types'
 
 export enum Axis {
-    X=0,
-    Y=1
+    X = 0,
+    Y = 1,
 }
 
 export class Node {
@@ -12,7 +12,7 @@ export class Node {
     private force_: Force = [0, 0]
     private id_ = -1
 
-    constructor(private p:Point, id = -1) {
+    constructor(private p: Point, id = -1) {
         this.id_ = id
     }
 
@@ -20,8 +20,12 @@ export class Node {
         this.fixity_[axis] = value
     }
 
-    get id() {return this.id_}
-    set id(i: number) {this.id_ = i}
+    get id() {
+        return this.id_
+    }
+    set id(i: number) {
+        this.id_ = i
+    }
 
     get fixity() {
         return this.fixity_
@@ -32,7 +36,9 @@ export class Node {
     }
 
     get force() {
-        console.error('TODO: compute the forces du to (1) the circum-nodes and (2) the external forces')
+        console.error(
+            'TODO: compute the forces du to (1) the circum-nodes and (2) the external forces',
+        )
         return this.force_
     }
 
@@ -46,8 +52,8 @@ export class Node {
     }
 
     update(u: Displ, damp = 1): number {
-        this.p[0] += u[0]*damp
-        this.p[1] += u[1]*damp
+        this.p[0] += u[0] * damp
+        this.p[1] += u[1] * damp
         return norm2(u)
     }
 }

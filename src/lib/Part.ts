@@ -1,4 +1,4 @@
-import { Triangle } from "./Triangle"
+import { Triangle } from './Triangle'
 
 export class Part {
     private triangles_: Triangle[] = []
@@ -7,5 +7,7 @@ export class Part {
         this.triangles_ = triangles
     }
 
-    get triangles() {return this.triangles_}
+    get triangles() {
+        return this.triangles_
+    }
 }

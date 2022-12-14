@@ -1,9 +1,8 @@
-import { Displ, Vectord } from "./types"
+import { Displ, Vectord } from './types'
 
 export function norm2(u: Displ) {
     return u[0] ** 2 + u[1] ** 2
 }
-
 
 export function scaleMat(m: Array<Array<number>>, a: number) {
     for (let i = 0; i < m.length; ++i) {
@@ -46,7 +45,11 @@ export function multVec(A: Array<Array<number>>, b: Array<number>): Vectord {
     return s
 }
 
-export function multVecForId(id: number, A: Array<Array<number>>, b: Array<number>): Displ {
+export function multVecForId(
+    id: number,
+    A: Array<Array<number>>,
+    b: Array<number>,
+): Displ {
     const aNumRows = A.length
     const aNumCols = A[0].length
     const s: Displ = [0, 0]
@@ -90,8 +93,11 @@ export function invert(A: Array<Array<number>>): Array<Array<number>> {
 
 // ------------------------------------------------------
 
-const withoutElementAtIndex = (arr, index) => [...arr.slice(0, index), ...arr.slice(index + 1)]
-const sum = arr => arr.reduce((acc, value) => acc + value, 0)
+const withoutElementAtIndex = (arr, index) => [
+    ...arr.slice(0, index),
+    ...arr.slice(index + 1),
+]
+const sum = (arr) => arr.reduce((acc, value) => acc + value, 0)
 
 // Excerpt from https://github.com/RodionChachura/linear-algebra
 class Matrix {
@@ -103,17 +109,17 @@ class Matrix {
     }
 
     columns() {
-        return this.rows[0].map((_, i) => this.rows.map(r => r[i]))
+        return this.rows[0].map((_, i) => this.rows.map((r) => r[i]))
     }
-    componentWiseOperation(func: Function, {rows}) {
+    componentWiseOperation(func: Function, { rows }) {
         const newRows = rows.map((row, i) =>
-            row.map((element, j) => func(this.rows[i][j], element))
+            row.map((element, j) => func(this.rows[i][j], element)),
         )
         return new Matrix(newRows)
     }
     scaleBy(number) {
-        const newRows = this.rows.map(row =>
-            row.map(element => element * number)
+        const newRows = this.rows.map((row) =>
+            row.map((element) => element * number),
         )
         return new Matrix(newRows)
     }
@@ -122,14 +128,21 @@ class Matrix {
     }
     determinant() {
         if (this.rows.length !== this.rows[0].length) {
-            throw new Error('Only matrices with the same number of rows and columns are supported.')
+            throw new Error(
+                'Only matrices with the same number of rows and columns are supported.',
+            )
         }
         if (this.rows.length === 2) {
-            return this.rows[0][0] * this.rows[1][1] - this.rows[0][1] * this.rows[1][0]
+            return (
+                this.rows[0][0] * this.rows[1][1] -
+                this.rows[0][1] * this.rows[1][0]
+            )
         }
 
         const parts = this.rows[0].map((coef, index) => {
-            const matrixRows = this.rows.slice(1).map(row => [...row.slice(0, index), ...row.slice(index + 1)])
+            const matrixRows = this.rows
+                .slice(1)
+                .map((row) => [...row.slice(0, index), ...row.slice(index + 1)])
             const matrix = new Matrix(matrixRows)
             const result = coef * matrix.determinant()
             return index % 2 === 0 ? result : -result
@@ -139,12 +152,15 @@ class Matrix {
     }
     map(func) {
         return new Matrix(
-            this.rows.map((row, i) => row.map((element, j) => func(element, i, j)))
+            this.rows.map((row, i) =>
+                row.map((element, j) => func(element, i, j)),
+            ),
         )
     }
     minor(i, j) {
-        const newRows = withoutElementAtIndex(this.rows, i)
-            .map(row => withoutElementAtIndex(row, j))
+        const newRows = withoutElementAtIndex(this.rows, i).map((row) =>
+            withoutElementAtIndex(row, j),
+        )
 
         const matrix = new Matrix(newRows)
         return matrix.determinant()
@@ -155,14 +171,12 @@ class Matrix {
         return sign * minor
     }
     adjugate() {
-        return this
-            .map((_, i, j) => this.cofactor(i, j))
-            .transpose()
+        return this.map((_, i, j) => this.cofactor(i, j)).transpose()
     }
     inverse() {
         const determinant = this.determinant()
         if (determinant === 0) {
-            throw new Error("Determinant is zero.")
+            throw new Error('Determinant is zero.')
         }
         const adjugate = this.adjugate()
         return adjugate.scaleBy(1 / determinant)
