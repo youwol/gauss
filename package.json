@@ -15,8 +15,7 @@
     "doc": "rm -fr dist/docs && typedoc src/ src/examples --exclude src/lib --exclude src/tests --media ./images --excludePrivate --disableSources --out dist/docs --includeVersion --hideGenerator",
     "publish-npm-public": "yarn build:prod && yarn test-coverage && yarn publish --access public"
   },
-  "dependencies": {
-  },
+  "dependencies": {},
   "peerDependencies": {},
   "devDependencies": {
     "@types/filesystem": "0.0.30",
@@ -26,9 +25,12 @@
     "@youwol/geometry": "^0.0.8",
     "@youwol/io": "^0.0.20",
     "@youwol/math": "^0.0.18",
+    "@youwol/prettier-config": "^0.0.2",
     "eslint": "7.23.0",
     "jest": "26.6.3",
     "jest-junit": "12.0.0",
+    "prettier": "^2.7.1",
+    "prettier-plugin-properties": "^0.2.0",
     "ts-jest": "26.5.4",
     "ts-loader": "8.1.0",
     "tslib": "^2.3.1",
@@ -43,5 +45,6 @@
       "version": "0.0.0"
     },
     "cdnDependencies": {}
-  }
+  },
+  "prettier": "@youwol/prettier-config"
 }
