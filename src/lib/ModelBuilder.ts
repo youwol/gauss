@@ -3,10 +3,10 @@ import { Serie } from '@youwol/dataframe'
 import { Triangle, Node, Material, Part, Model } from '.'
 
 export class ModelBuilder {
-    private model_ : Model = undefined
+    private model_: Model = undefined
 
     constructor() {
-        this.model_ = new Model
+        this.model_ = new Model()
     }
 
     /**
@@ -28,7 +28,7 @@ export class ModelBuilder {
         // Do the nodes
         const nodes: Node[] = []
         const nodeMap = new Map<number, Node>()
-        s.forEachNode( node => {
+        s.forEachNode((node) => {
             const n = new Node(node.pos, node.id)
             // console.log(node.pos)
             nodes.push(n)
@@ -37,18 +37,20 @@ export class ModelBuilder {
 
         // Do the triangles
         const triangles: Triangle[] = []
-        s.forEachFace( face => {
+        s.forEachFace((face) => {
             const nodes: Node[] = []
-            face.nodes.forEach( n => {
-                nodes.push( nodeMap.get(n.id) )
+            face.nodes.forEach((n) => {
+                nodes.push(nodeMap.get(n.id))
             })
             if (nodes.length === 3) {
-                triangles.push( new Triangle({
-                    p1: nodes[0], 
-                    p2: nodes[1], 
-                    p3: nodes[2], 
-                    material
-                }) )
+                triangles.push(
+                    new Triangle({
+                        p1: nodes[0],
+                        p2: nodes[1],
+                        p3: nodes[2],
+                        material,
+                    }),
+                )
             }
         })
 
