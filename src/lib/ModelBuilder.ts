@@ -1,4 +1,4 @@
-import { Surface, nodesAroundNode } from '@youwol/geometry'
+import { Surface } from '@youwol/geometry'
 import { Serie } from '@youwol/dataframe'
 import { Triangle, Node, Material, Part, Model } from '.'
 
