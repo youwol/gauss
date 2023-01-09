@@ -1,1 +1,1 @@
-test('fake test', () => { })
+test('fake test', () => {})

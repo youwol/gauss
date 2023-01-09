@@ -1,6 +1,6 @@
 /**
  * Minimal example
- * 
+ *
  * ```js
  * // Coming soon
  * ```

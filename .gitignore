@@ -4,11 +4,10 @@ coverage/
 junit.xml
 src/auto_generated.ts
 
-dist/lib
-dist/@youwol
-dist/index.d.ts
-dist/examples
-dist/tests
+/dist/*
+!/dist/docs/
+!/dist/docs/*
+!/dist/docs/**/*
 
 sources/
 
@@ -16,3 +15,5 @@ cdn.zip
 **/.DS_Store
 
 .yw_pipeline/__pycache__/
+
+*.iml
