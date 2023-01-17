@@ -18,4 +18,4 @@ const indices = df.Serie.create({
 const builder = new gauss.ModelBuilder()
 builder.addPart(positions, indices, new gauss.Material(0.25, 1))
 
-const model = builder.model
+// const model = builder.model

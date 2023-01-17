@@ -12,4 +12,6 @@ test('fake test', () => {
     builder.addPart(positions, indices, new Material(0.25, 30e6))
 
     const model = builder.model
+
+    expect(model).toBeDefined()
 })
