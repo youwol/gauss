@@ -50,7 +50,7 @@ export function multVecForId(
     A: Array<Array<number>>,
     b: Array<number>,
 ): Displ {
-    const aNumRows = A.length
+    // const aNumRows = A.length
     const aNumCols = A[0].length
     const s: Displ = [0, 0]
 
@@ -111,7 +111,7 @@ class Matrix {
     columns() {
         return this.rows[0].map((_, i) => this.rows.map((r) => r[i]))
     }
-    componentWiseOperation(func: Function, { rows }) {
+    componentWiseOperation(func: (a: number, b: number) => number, { rows }) {
         const newRows = rows.map((row, i) =>
             row.map((element, j) => func(this.rows[i][j], element)),
         )
